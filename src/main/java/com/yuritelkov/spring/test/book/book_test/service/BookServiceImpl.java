@@ -27,12 +27,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBook(int id) {
-        Book employee = null;
+        Book book = null;
         Optional<Book> optional = bookRepository.findById(id);
         if (optional.isPresent()) {
-            employee = optional.get();
+            book = optional.get();
         }
-        return employee;
+        return book;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
 //
 //    @Override
 //    public List<Book> findAllByName(String name) {
-//        List<Book> employees =bookRepository.findAllByName(name);
-//        return employees;
+//        List<Book> book =bookRepository.findAllByName(name);
+//        return book;
 //    }
 }
