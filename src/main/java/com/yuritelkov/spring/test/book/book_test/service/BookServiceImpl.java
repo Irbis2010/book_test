@@ -4,7 +4,11 @@ package com.yuritelkov.spring.test.book.book_test.service;
 import com.yuritelkov.spring.test.book.book_test.dao.BookRepository;
 import com.yuritelkov.spring.test.book.book_test.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Lists;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +20,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        return Lists.newArrayList(bookRepository.findAll());
     }
 
     @Override
@@ -39,6 +43,11 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(int id) {
         bookRepository.deleteById(id);
 
+    }
+
+    @Override
+    public Page<Book> getAllByPage(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
 

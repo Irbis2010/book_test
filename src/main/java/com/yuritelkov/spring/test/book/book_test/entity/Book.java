@@ -26,17 +26,17 @@ public class Book {
     private boolean readAlready;
 
 
-//    public Book() {
-//    }
-//
-//    public Book(String title, String description, String author, String isbn, String printYear, boolean readAlready) {
-//        this.title = title;
-//        this.description = description;
-//        this.author = author;
-//        this.isbn = isbn;
-//        this.printYear = printYear;
-//        this.readAlready = readAlready;
-//    }
+    public Book() {
+    }
+
+    public Book(String title, String description, String author, String isbn, String printYear, boolean readAlready) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+        this.isbn = isbn;
+        this.printYear = printYear;
+        this.readAlready = readAlready;
+    }
 
     public int getId() {
         return id;
