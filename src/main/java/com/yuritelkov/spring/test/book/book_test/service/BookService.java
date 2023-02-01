@@ -19,4 +19,8 @@ public interface BookService {
 
     Page<Book> getAllByPage(Pageable pageable);
 
+
+    Page<Book> search(String term, String printYear, Pageable pageable);
+    Page<Book> search(String term, String printYear, boolean readAlReady, Pageable pageable);
+
 }
