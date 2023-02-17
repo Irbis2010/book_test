@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Внести изменения в описание книги</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Внести изменения в описание книги</h1>
+    <hr>
+    <h2>Изменить книгу</h2>
+
+    <!--/*@thymesVar id="book" type="com.yuritelkov.spring.test.book.book_test.entity.Book"*/-->
+    <form action="#" th:action="@{/saveBook}" th:object="${book}" method="POST">
+
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{title}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{description}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{author}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{isbn}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{publication}" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{location}" class="form-control mb-4 col-4">
+
+        <button type="submit" class="btn btn-info col-2"> Update Book</button>
+    </form>
+
+</div>
+
+</body>
+</html>

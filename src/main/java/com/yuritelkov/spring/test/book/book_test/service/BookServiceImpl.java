@@ -1,14 +1,17 @@
 package com.yuritelkov.spring.test.book.book_test.service;
 
 
+
 import com.yuritelkov.spring.test.book.book_test.dao.BookRepository;
 import com.yuritelkov.spring.test.book.book_test.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,22 +22,24 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     @Override
+    @Transactional(readOnly=true)
     public List<Book> getAllBooks() {
-        return Lists.newArrayList(bookRepository.findAll());
+        return bookRepository.findAll();
     }
 
     @Override
     public void saveBook(Book book) {
-
         bookRepository.save(book);
     }
 
     @Override
-    public Book getBook(int id) {
+    @Transactional(readOnly=true)
+    public Book getBookById(int id) {
         Book book = null;
         Optional<Book> optional = bookRepository.findById(id);
         if (optional.isPresent()) {
             book = optional.get();
+        } else { throw new RuntimeException(" Book not found for id ::  " + id);
         }
         return book;
     }
@@ -46,19 +51,27 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> getAllByPage(Pageable pageable) {
-        return bookRepository.findAll(pageable);
+    public Page<Book> findPaginated(int pageNo, int pageSize) {
+//        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+//                Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.bookRepository.findAll(pageable);
     }
 
-    @Override
-    public Page<Book> search(String term, String printYear, Pageable pageable) {
-        return bookRepository.getBySearchParams(term, printYear, pageable);
-    }
 
-    @Override
-    public Page<Book> search(String term, String printYear, boolean readAlReady, Pageable pageable) {
-        return bookRepository.getBySearchParamsAndReadAlready(term, printYear, readAlReady, pageable);
-    }
+//
+//    @Override
+//    @Transactional(readOnly=true)
+//    public Page<Book> search(String term, String publication, Pageable pageable) {
+//        return bookRepository.getBySearchParams(term, publication, pageable);
+//    }
+//
+//    @Override
+//    @Transactional(readOnly=true)
+//    public Page<Book> search(String term, String publication, boolean readAlReady, Pageable pageable) {
+//        return bookRepository.getBySearchParamsAndReadAlready(term, publication, readAlReady, pageable);
+//    }
 
 
 

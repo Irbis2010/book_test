@@ -20,22 +20,23 @@ public class Book {
     private String author;
     @Column(name = "isbn")
     private String isbn;
-    @Column(name = "printYear")
-    private String printYear;
-    @Column(name = "readAlready")
-    private boolean readAlready;
+    @Column(name = "publication")
+    private String publication;
+    @Column(name = "location")
+    private String location;
+
 
 
     public Book() {
     }
 
-    public Book(String title, String description, String author, String isbn, String printYear, boolean readAlready) {
+    public Book(String title, String description, String author, String isbn, String publication, String location) {
         this.title = title;
         this.description = description;
         this.author = author;
         this.isbn = isbn;
-        this.printYear = printYear;
-        this.readAlready = readAlready;
+        this.publication = publication;
+        this.location = location;
     }
 
     public int getId() {
@@ -78,19 +79,21 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPrintYear() {
-        return printYear;
+    public String getPublication() {
+        return publication;
     }
 
-    public void setPrintYear(String printYear) {
-        this.printYear = printYear;
+    public void setPublication(String publication) {
+        this.publication = publication;
     }
 
-    public boolean isReadAlready() {
-        return readAlready;
+    public String getLocation() {
+        return location;
     }
 
-    public void setReadAlready(boolean readAlready) {
-        this.readAlready = readAlready;
+    public void setLocation(String location) {
+        this.location = location;
     }
+
+
 }
