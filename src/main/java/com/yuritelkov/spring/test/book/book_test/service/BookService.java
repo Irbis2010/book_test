@@ -17,7 +17,7 @@ public interface BookService {
 
     void deleteBook(int id);
 
-    Page<Book> findPaginated(int pageNo, int pageSize);
+    Page<Book> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
 
 

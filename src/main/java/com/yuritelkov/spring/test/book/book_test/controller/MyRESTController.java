@@ -27,7 +27,7 @@ public class MyRESTController {
 
     @GetMapping("/book")
     public String viewHomePage(Model model) {
-        return findPaginated(1, model);
+        return findPaginated(1,"title", "asc", model);
     }
 
     @GetMapping("/showNewBookForm")
@@ -65,22 +65,22 @@ public class MyRESTController {
 
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-//                                @RequestParam("sortField") String sortField,
-//                                @RequestParam("sortDir") String sortDir,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
                                 Model model) {
 
         int pageSize = 5;
 
-        Page<Book> page = bookService.findPaginated(pageNo, pageSize);
+        Page<Book> page = bookService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<Book> bookList = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
 
-//        model.addAttribute("sortField", sortField);
-//        model.addAttribute("sortDir", sortDir);
-//        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("bookList", bookList);
         return "books/book";
@@ -129,35 +129,6 @@ public class MyRESTController {
 //        }
 //        return bookService.search(term, afterYear, pageRequest);
 //    }
-//
-//
-//    @PostMapping("")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public @ResponseBody
-//    Book addNewBook(@RequestBody Book book) {
-//        logger.info("Creating book: " + book);
-//        bookService.saveBook(book);
-//        logger.info("Book created successfully with info: " + book);
-//        return book;
-//    }
-//
-//    @PutMapping("")
-//    public @ResponseBody
-//    Book updateBook(@RequestBody Book book) {
-//        logger.info("Updating book: " + book);
-//        bookService.saveBook(book);
-//        logger.info("Book update successfully with info: " + book);
-//        return book;
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public @ResponseBody
-//    ResponseEntity<?> deleteBook(@PathVariable int id) {
-//
-//        logger.info("Deleting book with id: " + id);
-//        bookService.deleteBook(id);
-//        logger.info("book deleted successfully");
-//        return ResponseEntity.ok("deleted Book #" + id);
-//    }
+
 
 }
