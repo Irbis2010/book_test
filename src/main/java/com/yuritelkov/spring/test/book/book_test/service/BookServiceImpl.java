@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
+
 
     @Override
     public void saveBook(Book book) {
@@ -59,20 +61,10 @@ public class BookServiceImpl implements BookService {
         return this.bookRepository.findAll(pageable);
     }
 
-
-//
-//    @Override
-//    @Transactional(readOnly=true)
-//    public Page<Book> search(String term, String publication, Pageable pageable) {
-//        return bookRepository.getBySearchParams(term, publication, pageable);
-//    }
-//
-//    @Override
-//    @Transactional(readOnly=true)
-//    public Page<Book> search(String term, String publication, boolean readAlReady, Pageable pageable) {
-//        return bookRepository.getBySearchParamsAndReadAlready(term, publication, readAlReady, pageable);
-//    }
-
+    @Override
+    public Page<Book> findByTitle(String title, Pageable pageable) {
+        return bookRepository.findByTitle(title,pageable);
+    }
 
 
 }
